@@ -10,9 +10,12 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import ro.sapientia.android_9eloadas.R
 import ro.sapientia.android_9eloadas.adapter.WordAdapter
 import ro.sapientia.android_9eloadas.viewmodel.WordViewModel
@@ -31,7 +34,6 @@ class WordFragment : Fragment() {
         super.onCreate(savedInstanceState)
         val factory = ViewModelFactory(this.requireContext())
         viewModel = ViewModelProvider(this, factory).get(WordViewModel::class.java)
-        Log.i("XXX", "WordFragment - onCreate")
     }
 
     override fun onCreateView(
@@ -56,8 +58,6 @@ class WordFragment : Fragment() {
                 DividerItemDecoration.VERTICAL
             )
         )
-        //
-//        recycler_view.setHasFixedSize(true)
 
         viewModel.contentChange.observe(this.viewLifecycleOwner, Observer{
 //            Log.i("XXX - WordFragment", viewModel.liveData.value!![0])
